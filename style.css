@@ -1,0 +1,27 @@
+.scrollytelling {
+  display: flex;
+}
+
+.scrolly-container {
+  width: 50%;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.step {
+  padding: 50px;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.graphic-container {
+  position: fixed;
+  width: 50%;
+  height: 100vh;
+  right: 0;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
