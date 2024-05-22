@@ -1,102 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scrollytelling with D3</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .scrollytelling {
-      display: flex;
-    }
-    .scrolly-container {
-      width: 50%;
-      overflow-y: scroll;
-      height: 100vh;
-      padding: 20px;
-    }
-    .step {
-      padding: 50px;
-      font-size: 20px;
-      border-bottom: 1px solid #ccc;
-    }
-    .graphic-container {
-      position: sticky;
-      top: 0;
-      width: 50%;
-      height: 100vh;
-      background: #f8f8f8;
-    }
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollytelling Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+        }
+        #section1 {
+            background-color: #3498db;
+        }
+        #section2 {
+            background-color: #2ecc71;
+        }
+        #section3 {
+            background-color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
-  <div class="scrollytelling">
-    <div class="scrolly-container">
-      <div class="step" data-step="1">Step 1: Introduction</div>
-      <div class="step" data-step="2">Step 2: Some Data</div>
-      <div class="step" data-step="3">Step 3: More Data</div>
-      <div class="step" data-step="4">Step 4: Conclusion</div>
+    <div id="section1" class="section">
+        <p>Welcome to Page 1</p>
     </div>
-    <div class="graphic-container">
-      <svg id="graphic"></svg>
+    <div id="section2" class="section">
+        <p>This is Page 2</p>
     </div>
-  </div>
-
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-  <script src="https://unpkg.com/scrollama"></script>
-  <script>
-    // Initialize the SVG and D3 visualization
-    const svg = d3.select("#graphic")
-                  .attr("width", window.innerWidth / 2)
-                  .attr("height", window.innerHeight);
-
-    // Example: Add a simple circle
-    const circle = svg.append("circle")
-                      .attr("cx", 100)
-                      .attr("cy", 100)
-                      .attr("r", 50)
-                      .attr("fill", "blue");
-
-    // Initialize Scrollama
-    const scroller = scrollama();
-
-    // Setup the Scrollama instance
-    scroller.setup({
-      step: ".step", // selector for the steps
-      offset: 0.5,   // trigger the step when it is in the middle of the viewport
-      debug: true
-    })
-    .onStepEnter(response => {
-      const { index } = response;
-      updateVisualization(index);
-    });
-
-    // Function to update the visualization based on the current step
-    function updateVisualization(stepIndex) {
-      switch (stepIndex) {
-        case 0:
-          circle.transition().attr("fill", "blue");
-          break;
-        case 1:
-          circle.transition().attr("fill", "red");
-          break;
-        case 2:
-          circle.transition().attr("fill", "green");
-          break;
-        case 3:
-          circle.transition().attr("fill", "purple");
-          break;
-      }
-    }
-
-    // Resize event
-    window.addEventListener("resize", scroller.resize);
-  </script>
+    <div id="section3" class="section">
+        <p>End on Page 3</p>
+    </div>
 </body>
 </html>
