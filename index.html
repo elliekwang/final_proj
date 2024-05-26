@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrollytelling Example with D3.js Map and Bar Chart</title>
+    <title>Scrollytelling Example with D3.js Bar Chart and Leaflet Map</title>
     <style>
         body {
             margin: 0;
@@ -18,109 +18,143 @@
             color: white;
         }
         #section1 {
-            background-color: #3498db;
+            background-color: #d1c9cc;
         }
         #section2 {
-            background-color: #2ecc71;
+            background-color: #d1c9cc;
         }
         #section3 {
-            background-color: #e74c3c;
+            background-color: #d1c9cc;
         }
         svg {
             max-width: 100%;
             height: auto;
         }
+        #map { 
+            height: 600px; 
+            width: 800px;
+        }
     </style>
-    <!-- Load d3.js -->
+    <!-- Load d3.js and Leaflet.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
 </head>
 <body>
     <div id="section1" class="section">
         <p>Welcome to Page 1</p>
     </div>
     <div id="section2" class="section">
-        <svg id="map" width="800" height="600"></svg>
+        <div id="map"></div>
     </div>
     <div id="section3" class="section">
-        <svg id="barchart" width="800" height="600"></svg>
+        <svg id="barchart" width="1200" height="800"></svg>
     </div>
 
     <script>
-        // The svg for the map
-        var svgMap = d3.select("#map"),
-            widthMap = +svgMap.attr("width"),
-            heightMap = +svgMap.attr("height");
+        // Initialize the Leaflet map
+        var map = L.map('map').setView([32.8283, -117.1074], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+            maxZoom: 17,
+        }).addTo(map);
 
-        // Map and projection
-        var projection = d3.geoNaturalEarth1()
-            .scale(widthMap / 1.3 / Math.PI)
-            .translate([widthMap / 2, heightMap / 2]);
+        var zoo = {
+            "type": "Feature",
+            "properties": {
+                "name": "San Diego Zoo",
+                "amenity": "Zoo",
+                "popupContent": "This is a zoo!"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [32.7349, -117.1490]
+            }
+        };
 
-        // Load external data and boot
-        d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data) {
-            // Draw the map
-            svgMap.append("g")
-                .selectAll("path")
-                .data(data.features)
-                .enter().append("path")
-                    .attr("fill", "#69b3a2")
-                    .attr("d", d3.geoPath().projection(projection))
-                    .style("stroke", "#fff");
-        });
+        L.geoJSON(zoo).addTo(map);
+
+        let blc = L.marker([32.652989, -116.989716]).addTo(map);
+        let elt = L.marker([32.638639, -116.954461]).addTo(map);
+        let ag = L.marker([32.803846, -117.079464]).addTo(map);
+        let dc = L.marker([32.781046, -117.083264]).addTo(map);
+        let glq = L.marker([32.714928, -117.159273]).addTo(map);
+
+        blc.bindPopup("<b>Bonita Long Canyon Airbnb</b><br>").openPopup();
+        elt.bindPopup("<b>Eastlake Trails Airbnb</b><br>").openPopup();
+        ag.bindPopup("<b>Allied Gardens Airbnb</b><br>").openPopup();
+        dc.bindPopup("<b>Del Cerro Airbnb</b><br>").openPopup();
+        glq.bindPopup("<b>Gaslamp Quarter Airbnb</b><br>").openPopup();
 
         // The svg for the bar chart
-        var margin = {top: 10, right: 30, bottom: 90, left: 40},
-            width = 800 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
+        var margin = {top: 20, right: 70, bottom: 160, left: 50},
+            width = 1100 - margin.left - margin.right,
+            height = 800 - margin.top - margin.bottom;
 
         var svgBar = d3.select("#barchart")
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        // Parse the Data
-        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(data) {
+        var dataLoaded = false;
 
-            // X axis
-            var x = d3.scaleBand()
-              .range([ 0, width ])
-              .domain(data.map(function(d) { return d.Country; }))
-              .padding(0.2);
-            svgBar.append("g")
-              .attr("transform", "translate(0," + height + ")")
-              .call(d3.axisBottom(x))
-              .selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
+        function drawChart() {
+            // Parse the new data
+            d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/neighbourhood_count.csv", function(data) {
 
-            // Add Y axis
-            var y = d3.scaleLinear()
-              .domain([0, 13000])
-              .range([ height, 0]);
-            svgBar.append("g")
-              .call(d3.axisLeft(y));
+                // X axis
+                var x = d3.scaleBand()
+                  .range([ 0, width ])
+                  .domain(data.map(function(d) { return d.neighbourhood; }))
+                  .padding(0.2);
+                svgBar.append("g")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(d3.axisBottom(x))
+                  .selectAll("text")
+                    .attr("transform", "translate(0,10)rotate(-90)")
+                    .style("text-anchor", "end");
 
-            // Bars
-            svgBar.selectAll("mybar")
-              .data(data)
-              .enter()
-              .append("rect")
-                .attr("x", function(d) { return x(d.Country); })
-                .attr("width", x.bandwidth())
-                .attr("fill", "#69b3a2")
-                // no bar at the beginning thus:
-                .attr("height", function(d) { return height - y(0); }) // always equal to 0
-                .attr("y", function(d) { return y(0); });
+                // Add Y axis
+                var y = d3.scaleLinear()
+                  .domain([0, d3.max(data, function(d) { return +d.id; })])
+                  .range([ height, 0]);
+                svgBar.append("g")
+                  .call(d3.axisLeft(y));
 
-            // Animation
-            svgBar.selectAll("rect")
-              .transition()
-              .duration(800)
-              .attr("y", function(d) { return y(d.Value); })
-              .attr("height", function(d) { return height - y(d.Value); })
-              .delay(function(d,i){ return(i*100); });
-        });
+                // Bars
+                svgBar.selectAll("mybar")
+                  .data(data)
+                  .enter()
+                  .append("rect")
+                    .attr("x", function(d) { return x(d.neighbourhood); })
+                    .attr("width", x.bandwidth())
+                    .attr("fill", "#f76583")
+                    // no bar at the beginning thus:
+                    .attr("height", function(d) { return height - y(0); }) // always equal to 0
+                    .attr("y", function(d) { return y(0); });
+
+                // Animation
+                svgBar.selectAll("rect")
+                  .transition()
+                  .duration(800)
+                  .attr("y", function(d) { return y(d.id); })
+                  .attr("height", function(d) { return height - y(d.id); })
+                  .delay(function(d,i){ return(i*100); });
+            });
+        }
+
+        // Intersection Observer to trigger animation on scroll
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !dataLoaded) {
+                    dataLoaded = true;
+                    drawChart();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('#section3'));
     </script>
 </body>
 </html>
