@@ -25,6 +25,7 @@
         }
         #section3 {
             background-color: #d1c9cc;
+            position: relative;
         }
         svg {
             max-width: 100%;
@@ -33,6 +34,44 @@
         #map { 
             height: 600px; 
             width: 800px;
+        }
+        .textbox {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 300px;
+            background-color: rgba(238, 151, 151, 0.725);
+            color: black;
+            padding: 20px;
+            border: 1px solid #cccccc00;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            font-size: 16px;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 10px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        #intro-text {
+            color: black;
+            font-size: 20px;
+            max-width: 800px;
+        }
+        #intro-title {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #intro-subtitle {
+            font-size: 20px;
+            margin-bottom: 20px;
         }
     </style>
     <!-- Load d3.js and Leaflet.js -->
@@ -44,17 +83,37 @@
 </head>
 <body>
     <div id="section1" class="section">
-        <p>Welcome to Page 1</p>
+        <div id="intro-text">
+            <div id="intro-title">Guide to Planting Airbnbs in San Diego, CA Based on Geospatial Analysis of Host and Guest Patterns</div>
+            <div id="intro-subtitle">Data collected from <a href="https://insideairbnb.com/get-the-data/" target="_blank">Inside Airbnb</a></div>
+            <p>By: Ellie Wang, David Tsukamoto, Hannah Lee</p>
+            <p>The overall goal of this interactive visualization is to guide prospective Airbnb hosts on starting their business through using geospatial analysis of host and guest patterns to determine prime location, optimal pricing and important amenities. This visualization will address the challenge of efficiently interpreting and analyzing a multitude of considerations through trend visualization, interactive modules, and scenario simulations.</p>
+        </div>
+    </div>
     </div>
     <div id="section2" class="section">
         <div id="map"></div>
     </div>
     <div id="section3" class="section">
+        <div class="textbox">
+            <p>This bar chart shows the distribution of Airbnbs across various neighborhoods in San Diego. Each bar represents the count of Airbnbs in a particular neighborhood. From the chart, we are able to see that the ten most popular neighborhoods are: </p>
+            <ol>
+                <li>Mission Bay</li>
+                <li>Pacific Beach</li>
+                <li>La Jolla</li>
+                <li>Ocean Beach</li>
+                <li>North Hills</li>
+                <li>East Village</li>
+                <li>Midtown</li>
+                <li>Loma Portal</li>
+                <li>Gaslamp Quarter</li>
+                <li>Balboa Park</li>
+            </ol>
+        </div>
         <svg id="barchart" width="1200" height="800"></svg>
     </div>
 
     <script>
-        // Initialize the Leaflet map
         var map = L.map('map').setView([32.8283, -117.1074], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
@@ -89,7 +148,7 @@
         glq.bindPopup("<b>Gaslamp Quarter Airbnb</b><br>").openPopup();
 
         // The svg for the bar chart
-        var margin = {top: 20, right: 70, bottom: 160, left: 50},
+        var margin = {top: 50, right: 70, bottom: 200, left: 60},
             width = 1100 - margin.left - margin.right,
             height = 800 - margin.top - margin.bottom;
 
@@ -97,13 +156,16 @@
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
         var dataLoaded = false;
 
         function drawChart() {
-            // Parse the new data
             d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/neighbourhood_count.csv", function(data) {
 
-                // X axis
+                // X-axis
                 var x = d3.scaleBand()
                   .range([ 0, width ])
                   .domain(data.map(function(d) { return d.neighbourhood; }))
@@ -115,7 +177,7 @@
                     .attr("transform", "translate(0,10)rotate(-90)")
                     .style("text-anchor", "end");
 
-                // Add Y axis
+                // Y-axis
                 var y = d3.scaleLinear()
                   .domain([0, d3.max(data, function(d) { return +d.id; })])
                   .range([ height, 0]);
@@ -130,9 +192,21 @@
                     .attr("x", function(d) { return x(d.neighbourhood); })
                     .attr("width", x.bandwidth())
                     .attr("fill", "#f76583")
-                    // no bar at the beginning thus:
-                    .attr("height", function(d) { return height - y(0); }) // always equal to 0
-                    .attr("y", function(d) { return y(0); });
+                    .attr("height", function(d) { return height - y(0); })
+                    .attr("y", function(d) { return y(0); })
+                    .on("mouseover", function(d) {
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        tooltip.html("Neighborhood: " + d.neighbourhood + "<br/>Airbnb Count: " + d.id)
+                            .style("left", (d3.event.pageX + 5) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
 
                 // Animation
                 svgBar.selectAll("rect")
@@ -141,6 +215,33 @@
                   .attr("y", function(d) { return y(d.id); })
                   .attr("height", function(d) { return height - y(d.id); })
                   .delay(function(d,i){ return(i*100); });
+
+                // Title
+                svgBar.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 0 - (margin.top / 2))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "24px") 
+                    .style("text-decoration", "underline")  
+                    .text("Distribution of Airbnbs Across Neighborhoods in San Diego");
+
+                // x-axis label
+                svgBar.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", height + margin.bottom - 40)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
+                    .text("Neighborhood");
+
+                // y-axis label
+                svgBar.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin.left)
+                    .attr("x", 0 - (height / 2))
+                    .attr("dy", "1em")
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
+                    .text("Count");
             });
         }
 
@@ -158,5 +259,7 @@
     </script>
 </body>
 </html>
+
+
 
 
