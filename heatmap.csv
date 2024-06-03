@@ -1,121 +1,121 @@
 ,group,variable,value
-0,1,Balboa Park,61.150677279709534
-1,1,East Village,58.09696891023559
-2,1,Gaslamp Quarter,59.033322687107415
-3,1,La Jolla,45.022417966115135
-4,1,Loma Portal,55.86780130615476
-5,1,Midtown,59.19886565047855
-6,1,Mission Bay,43.75526344696274
-7,1,North Hills,67.19475726919896
-8,1,Ocean Beach,55.38849929873773
-9,1,Pacific Beach,50.05813760340188
-10,2,Balboa Park,62.29128014842299
-11,2,East Village,57.832710549008326
-12,2,Gaslamp Quarter,58.89910419613388
-13,2,La Jolla,48.295554384115256
-14,2,Loma Portal,56.02541630148992
-15,2,Midtown,58.54788069073783
-16,2,Mission Bay,45.29755148370359
-17,2,North Hills,67.32178078331924
-18,2,Ocean Beach,56.33540372670808
-19,2,Pacific Beach,50.051493305870245
-20,3,Balboa Park,64.18098031001257
-21,3,East Village,57.999089904439984
-22,3,Gaslamp Quarter,59.53369530501437
-23,3,La Jolla,53.099313028630434
-24,3,Loma Portal,60.68071633521321
-25,3,Midtown,61.64315588005951
-26,3,Mission Bay,51.16722248689853
-27,3,North Hills,69.65069669784312
-28,3,Ocean Beach,59.74535868528802
-29,3,Pacific Beach,54.78887744593204
-30,4,Balboa Park,42.29437229437229
-31,4,East Village,41.945003353454055
-32,4,Gaslamp Quarter,33.641364136413635
-33,4,La Jolla,47.75317753177532
-34,4,Loma Portal,54.05930470347647
-35,4,Midtown,47.62637362637363
-36,4,Mission Bay,48.09496783957624
-37,4,North Hills,51.66995397764631
-38,4,Ocean Beach,45.3623188405797
-39,4,Pacific Beach,47.84071404050806
-40,5,Balboa Park,26.23935204580367
-41,5,East Village,26.48796001817356
-42,5,Gaslamp Quarter,23.677206430320457
-43,5,La Jolla,34.65460461056224
-44,5,Loma Portal,39.32317435187017
-45,5,Midtown,32.93158454448776
-46,5,Mission Bay,34.93098019113178
-47,5,North Hills,33.447859006171655
-48,5,Ocean Beach,30.96774193548388
-49,5,Pacific Beach,35.93236105112787
-50,6,Balboa Park,29.36507936507936
-51,6,East Village,25.747820254862507
-52,6,Gaslamp Quarter,25.13751375137513
-53,6,La Jolla,34.8380483804838
-54,6,Loma Portal,37.95501022494887
-55,6,Midtown,33.54578754578755
-56,6,Mission Bay,37.84335981838819
-57,6,North Hills,31.93293885601577
-58,6,Ocean Beach,32.93333333333332
-59,6,Pacific Beach,37.40473738414005
-60,7,Balboa Park,35.651445328864675
-61,7,East Village,39.52099694943856
-62,7,Gaslamp Quarter,33.20557862237837
-63,7,La Jolla,43.161528389477446
-64,7,Loma Portal,44.00356224025332
-65,7,Midtown,45.16838000708968
-66,7,Mission Bay,48.45117351982716
-67,7,North Hills,42.29178596424254
-68,7,Ocean Beach,44.67882187938289
-69,7,Pacific Beach,45.19783395900468
-70,8,Balboa Park,28.16645719871526
-71,8,East Village,31.381839423638606
-72,8,Gaslamp Quarter,26.030022357074404
-73,8,La Jolla,33.68249811530373
-74,8,Loma Portal,33.61369483475164
-75,8,Midtown,36.72456575682382
-76,8,Mission Bay,31.68686609790926
-77,8,North Hills,33.64509766494878
-78,8,Ocean Beach,37.62692847124824
-79,8,Pacific Beach,33.590246171223534
-80,9,Balboa Park,32.43867243867244
-81,9,East Village,34.634473507712954
-82,9,Gaslamp Quarter,30.550055005500536
-83,9,La Jolla,28.48708487084871
-84,9,Loma Portal,33.22085889570552
-85,9,Midtown,40.102564102564095
-86,9,Mission Bay,29.51570185395384
-87,9,North Hills,37.65285996055227
-88,9,Ocean Beach,38.39420289855072
-89,9,Pacific Beach,30.03432887058015
-90,10,Balboa Park,42.2427035330261
-91,10,East Village,39.92990199260076
-92,10,Gaslamp Quarter,33.493026722027054
-93,10,La Jolla,32.84926397651072
-94,10,Loma Portal,41.599050069265786
-95,10,Midtown,48.24530308401276
-96,10,Mission Bay,32.67181721650617
-97,10,North Hills,51.32658904371064
-98,10,Ocean Beach,41.716690042075726
-99,10,Pacific Beach,34.99883724793197
-100,11,Balboa Park,44.34343434343434
-101,11,East Village,39.9664654594232
-102,11,Gaslamp Quarter,36.16061606160616
-103,11,La Jolla,31.83271832718327
-104,11,Loma Portal,41.8200408997955
-105,11,Midtown,48.6080586080586
-106,11,Mission Bay,30.675368898978427
-107,11,North Hills,51.94608809993425
-108,11,Ocean Beach,42.26086956521739
-109,11,Pacific Beach,34.88499828355647
-110,12,Balboa Park,48.61052925569055
-111,12,East Village,46.537288245602646
-112,12,Gaslamp Quarter,46.92856382412435
-113,12,La Jolla,35.07915724318534
-114,12,Loma Portal,46.79398377201662
-115,12,Midtown,50.85430698333925
-116,12,Mission Bay,33.57072241953791
-117,12,North Hills,57.3010116434434
-118,12,Ocean Beach,46.0196353436185
-119,12,Pacific Beach,38.739576758247225
+0,1,Balboa Park,61.0
+1,1,East Village,58.0
+2,1,Gaslamp Quarter,59.0
+3,1,La Jolla,45.0
+4,1,Loma Portal,55.0
+5,1,Midtown,59.0
+6,1,Mission Bay,43.0
+7,1,North Hills,67.0
+8,1,Ocean Beach,55.0
+9,1,Pacific Beach,50.0
+10,2,Balboa Park,62.0
+11,2,East Village,57.0
+12,2,Gaslamp Quarter,58.0
+13,2,La Jolla,48.0
+14,2,Loma Portal,56.0
+15,2,Midtown,58.0
+16,2,Mission Bay,45.0
+17,2,North Hills,67.0
+18,2,Ocean Beach,56.0
+19,2,Pacific Beach,50.0
+20,3,Balboa Park,64.0
+21,3,East Village,57.0
+22,3,Gaslamp Quarter,59.0
+23,3,La Jolla,53.0
+24,3,Loma Portal,60.0
+25,3,Midtown,61.0
+26,3,Mission Bay,51.0
+27,3,North Hills,69.0
+28,3,Ocean Beach,59.0
+29,3,Pacific Beach,54.0
+30,4,Balboa Park,42.0
+31,4,East Village,41.0
+32,4,Gaslamp Quarter,33.0
+33,4,La Jolla,47.0
+34,4,Loma Portal,54.0
+35,4,Midtown,47.0
+36,4,Mission Bay,48.0
+37,4,North Hills,51.0
+38,4,Ocean Beach,45.0
+39,4,Pacific Beach,47.0
+40,5,Balboa Park,26.0
+41,5,East Village,26.0
+42,5,Gaslamp Quarter,23.0
+43,5,La Jolla,34.0
+44,5,Loma Portal,39.0
+45,5,Midtown,32.0
+46,5,Mission Bay,34.0
+47,5,North Hills,33.0
+48,5,Ocean Beach,30.0
+49,5,Pacific Beach,35.0
+50,6,Balboa Park,29.0
+51,6,East Village,25.0
+52,6,Gaslamp Quarter,25.0
+53,6,La Jolla,34.0
+54,6,Loma Portal,37.0
+55,6,Midtown,33.0
+56,6,Mission Bay,37.0
+57,6,North Hills,31.0
+58,6,Ocean Beach,32.0
+59,6,Pacific Beach,37.0
+60,7,Balboa Park,35.0
+61,7,East Village,39.0
+62,7,Gaslamp Quarter,33.0
+63,7,La Jolla,43.0
+64,7,Loma Portal,44.0
+65,7,Midtown,45.0
+66,7,Mission Bay,48.0
+67,7,North Hills,42.0
+68,7,Ocean Beach,44.0
+69,7,Pacific Beach,45.0
+70,8,Balboa Park,28.0
+71,8,East Village,31.0
+72,8,Gaslamp Quarter,26.0
+73,8,La Jolla,33.0
+74,8,Loma Portal,33.0
+75,8,Midtown,36.0
+76,8,Mission Bay,31.0
+77,8,North Hills,33.0
+78,8,Ocean Beach,37.0
+79,8,Pacific Beach,33.0
+80,9,Balboa Park,32.0
+81,9,East Village,34.0
+82,9,Gaslamp Quarter,30.0
+83,9,La Jolla,28.0
+84,9,Loma Portal,33.0
+85,9,Midtown,40.0
+86,9,Mission Bay,29.0
+87,9,North Hills,37.0
+88,9,Ocean Beach,38.0
+89,9,Pacific Beach,30.0
+90,10,Balboa Park,42.0
+91,10,East Village,39.0
+92,10,Gaslamp Quarter,33.0
+93,10,La Jolla,32.0
+94,10,Loma Portal,41.0
+95,10,Midtown,48.0
+96,10,Mission Bay,32.0
+97,10,North Hills,51.0
+98,10,Ocean Beach,41.0
+99,10,Pacific Beach,34.0
+100,11,Balboa Park,44.0
+101,11,East Village,39.0
+102,11,Gaslamp Quarter,36.0
+103,11,La Jolla,31.0
+104,11,Loma Portal,41.0
+105,11,Midtown,48.0
+106,11,Mission Bay,30.0
+107,11,North Hills,51.0
+108,11,Ocean Beach,42.0
+109,11,Pacific Beach,34.0
+110,12,Balboa Park,48.0
+111,12,East Village,46.0
+112,12,Gaslamp Quarter,46.0
+113,12,La Jolla,35.0
+114,12,Loma Portal,46.0
+115,12,Midtown,50.0
+116,12,Mission Bay,33.0
+117,12,North Hills,57.0
+118,12,Ocean Beach,46.0
+119,12,Pacific Beach,38.0
