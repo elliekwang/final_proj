@@ -306,7 +306,7 @@
                 "translate(" + marginHeatmap.left + "," + marginHeatmap.top + ")");
 
         // Read the data
-        d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/heatmap_df.csv", function(data) {
+        d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/heatmap.csv", function(data) {
 
             // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
             var myGroups = d3.map(data, function(d){return d.group;}).keys()
