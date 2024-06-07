@@ -198,37 +198,43 @@
                 svgBar.append("g")
                 .call(d3.axisLeft(y));
 
-                // Bars
+
+
+                
                 svgBar.selectAll("mybar")
                 .data(data)
                 .enter()
                 .append("rect")
-                    .attr("x", function(d) { return x(d.neighbourhood); })
-                    .attr("width", x.bandwidth())
-                    .attr("fill", "#f76583")
-                    .attr("height", function(d) { return heightBar - y(0); })
-                    .attr("y", function(d) { return y(0); })
-                    .on("mouseover", function(d) {
-                        tooltipBar.transition()
-                            .duration(200)
-                            .style("opacity", .9);
-                        tooltipBar.html("Neighborhood: " + d.neighbourhood + "<br/>Airbnb Count: " + d.id)
-                            .style("left", (d3.event.pageX + 5) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");
-                    })
-                    .on("mouseout", function(d) {
-                        tooltipBar.transition()
-                            .duration(500)
-                            .style("opacity", 0);
-                    });
+                .attr("x", function(d) { return x(d.neighbourhood); })
+                .attr("width", x.bandwidth())
+                .attr("fill", function(d, i) {
+                    // Conditionally set fill color for the first 10 bars
+                    return i < 10 ? "#F42A73" : "#F885AF";
+                })
+                .attr("height", function(d) { return heightBar - y(0); })
+                .attr("y", function(d) { return y(0); })
+                .on("mouseover", function(d) {
+                    tooltipBar.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltipBar.html("Neighborhood: " + d.neighbourhood + "<br/>Airbnb Count: " + d.id)
+                        .style("left", (d3.event.pageX + 5) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltipBar.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
 
-                // Animation
-                svgBar.selectAll("rect")
+            // Animation
+            svgBar.selectAll("rect")
                 .transition()
                 .duration(800)
                 .attr("y", function(d) { return y(d.id); })
                 .attr("height", function(d) { return heightBar - y(d.id); })
                 .delay(function(d,i){ return(i*100); });
+
 
                 // Title
                 svgBar.append("text")
@@ -289,7 +295,7 @@
                 "translate(" + marginHeatmap.left + "," + marginHeatmap.top + ")");
 
         // Read the data
-        d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/heatmap.csv", function(data) {
+        d3.csv("https://raw.githubusercontent.com/elliekwang/final_proj/main/heatmap_data", function(data) {
 
             // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
             var myGroups = d3.map(data, function(d){return d.group;}).keys()
@@ -319,10 +325,10 @@
             // Build color scale
             var myColor = d3.scaleSequential()
                 .interpolator(d3.interpolateInferno)
-                .domain([1,100])
+                .domain([2400,37500])
 
             // create a tooltip
-            var tooltipHeatmap = d3.select("#my_dataviz")
+            var tooltip = d3.select("body")
                 .append("div")
                 .style("opacity", 0)
                 .attr("class", "tooltip")
@@ -330,48 +336,40 @@
                 .style("border", "solid")
                 .style("border-width", "2px")
                 .style("border-radius", "5px")
-                .style("padding", "5px")
+                .style("padding", "5px");
 
-            // Three function that change the tooltip when user hover / move / leave a cell
+            // Three functions that change the tooltip when the user hovers/moves/leaves a cell
             var mouseover = function(d) {
-                tooltipHeatmap
-                .style("opacity", 1)
-                d3.select(this)
-                .style("stroke", "black")
-                .style("opacity", 1)
-            }
+                tooltip.style("opacity", 1);
+            };
             var mousemove = function(d) {
-                tooltipHeatmap
-                .html("The exact value of<br>this cell is: " + d.value)
-                .style("left", (d3.mouse(this)[0] + 150) + "px")
-                .style("top", (d3.mouse(this)[1]) + "px")
-            }
+                tooltip
+                    .html("There was " + d.value + " Airbnbs booked in this neighborhood for this month." )
+                    .style("left", (d3.event.pageX + 10) + "px")  // Position the tooltip to the right of the mouse pointer
+                    .style("top", (d3.event.pageY - 10) + "px"); // Position the tooltip slightly above the mouse pointer
+            };
             var mouseleave = function(d) {
-                tooltipHeatmap
-                .style("opacity", 0)
-                d3.select(this)
-                .style("stroke", "none")
-                .style("opacity", 0.8)
-            }
+                tooltip.style("opacity", 0);
+            };
 
-            // add the squares
+            // Add the squares
             svgHeatmap.selectAll()
-                .data(data, function(d) {return d.group+':'+d.variable;})
+                .data(data, function(d) { return d.group + ':' + d.variable; })
                 .enter()
                 .append("rect")
-                .attr("x", function(d) { return xHeatmap(d.group) })
-                .attr("y", function(d) { return yHeatmap(d.variable) })
+                .attr("x", function(d) { return xHeatmap(d.group); })
+                .attr("y", function(d) { return yHeatmap(d.variable); })
                 .attr("rx", 4)
                 .attr("ry", 4)
-                .attr("width", xHeatmap.bandwidth() )
-                .attr("height", yHeatmap.bandwidth() )
-                .style("fill", function(d) { return myColor(d.value)} )
+                .attr("width", xHeatmap.bandwidth())
+                .attr("height", yHeatmap.bandwidth())
+                .style("fill", function(d) { return myColor(d.value); })
                 .style("stroke-width", 4)
                 .style("stroke", "none")
                 .style("opacity", 0.8)
                 .on("mouseover", mouseover)
                 .on("mousemove", mousemove)
-                .on("mouseleave", mouseleave)
+                .on("mouseleave", mouseleave);
         })
 
         // Add title to graph
