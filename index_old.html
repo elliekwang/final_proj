@@ -21,38 +21,16 @@
         #section1, #section2, #section3, #section4, #section5, #section6, #section7 {
             background-color: #d1c9cc;
         }
+
+        
         svg {
             max-width: 100%;
-            width: 100%;
-            height: 100%;
-        }
-
-        #map { 
-            width: 40%; /* Adjust this value to your preference */
-            height: 50%; /* Make sure the map takes up full height */
-            margin-left: 45%;
-        }
-
-        #mapn {
-            width: 30%;
-            height: 20%;
-            margin-right: 55%;
-            margin-top: 16%;
-        }
-
-        #my_dataviz{
             height: auto;
-            width: auto;
-            margin-right: -40%;
         }
-        #datan {
-            width: 30%;
-            height: 20%;
-            margin-right: 50%;
-            margin-top: 13%;
+        #map { 
+            height: 600px; 
+            width: 800px;
         }
-    
-
         .textbox {
             position: absolute;
             top: 50px;
@@ -117,9 +95,6 @@
     <!-- Section 2 -->
     <div id="section2" class="section">
         <div id="map"></div>
-        <div class="textbox" id="mapn">
-            <p> Each Dot is a real Airbnb in the San Diego Area.  Along the coast, we see a higher denisty of Airbnbs compared to areas more inland.</p>
-        </div>
     </div>
 
     <!-- Section 3 -->
@@ -145,9 +120,6 @@
     <!-- Section 4 -->
     <div id="section4" class="section">
         <div id="my_dataviz"></div>
-        <div class="textbox" id="datan">
-            <p> Text </p>
-        </div>
     </div>
 
     <!-- Section 5 -->
@@ -352,7 +324,7 @@
                 .call(d3.axisLeft(yHeatmap).tickSize(0))
                 .select(".domain").remove()
 
-            // color scale
+            // Build color scale
             var myColor = d3.scaleSequential()
                 .interpolator(d => d3.interpolateInferno(1 - d))
                 .domain([1, 100]);
