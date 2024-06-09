@@ -47,7 +47,7 @@
         }
         #datan {
             width: 30%;
-            height: 50%;
+            height: 55%;
             margin-right: 50%;
             margin-top: 4%;
         }
@@ -336,7 +336,7 @@
         <!-- Section #4 - Heatmap -->
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <script>
-        var marginHeatmap = {top: 80, right: 25, bottom: 30, left: 140},
+        var marginHeatmap = {top: 80, right: 25, bottom: 40, left: 140},
             widthHeatmap = 600 - marginHeatmap.left - marginHeatmap.right,
             heightHeatmap = 450 - marginHeatmap.top - marginHeatmap.bottom;
 
@@ -366,6 +366,16 @@
                 .call(d3.axisBottom(xHeatmap).tickSize(0))
                 .select(".domain").remove()
 
+            // x-axis label
+            svgHeatmap.append("text")
+                .attr("x", widthHeatmap / 2)
+                .attr("y", heightHeatmap + marginHeatmap.bottom)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "black")
+                .text("Months");
+
+
             // y
             var yHeatmap = d3.scaleBand()
                 .range([ heightHeatmap, 0 ])
@@ -375,6 +385,15 @@
                 .style("font-size", 15)
                 .call(d3.axisLeft(yHeatmap).tickSize(0))
                 .select(".domain").remove()
+
+            svgHeatmap.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -heightHeatmap / 2)
+                .attr("y", -marginHeatmap.left + 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .style("fill", "black")
+                .text("Neighborhoods");
 
             // color scale
             var myColor = d3.scaleSequential()
