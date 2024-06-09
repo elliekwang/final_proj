@@ -125,20 +125,10 @@
     <!-- Section 3 -->
     <div id="section3" class="section">
         <div class="textbox">
-            <p> Did you know that just the top 10 neighborhoods account for a staggering 56% of all Airbnb listings in San Diego's 101 neighborhoods? Understanding the distribution of listings can help you strategically place your property where the demand is highest and take advantage of the most popular areas. These are the top 10 Airbnbs: 
+            <p>But while some neighborhoods in San Diego are saturated with Airbnb properties, others have relatively few listings.</p>
+            <p> Did you know that just the top 10 neighborhoods account for a staggering 56% of all Airbnb listings in San Diego's 101 neighborhoods? Understanding the distribution of listings can help you strategically place your property where the demand is highest and take advantage of the most popular areas. 
             </p>
-            <ol>
-                <li>Mission Bay</li>
-                <li>Pacific Beach</li>
-                <li>La Jolla</li>
-                <li>Ocean Beach</li>
-                <li>North Hills</li>
-                <li>East Village</li>
-                <li>Midtown</li>
-                <li>Loma Portal</li>
-                <li>Gaslamp Quarter</li>
-                <li>Balboa Park</li>
-            </ol>
+        
             <p> Using this visualization as well as the map above, we are able to further recognize that the neighborhoods that are most populated with Airbnbs fall in close proximity to beaches as well as known tourist areas. This is crucial to an Airbnb planter since it is important to recognize where your competition is but also where there is an thriving enrivonment for guests to book your Airbnb.
             </p>
             <p> With the information presented thus far, as a planter, you can research Airbnbs in these popular areas to further figure out what is a typical reasonable price to list your Airbnb, what amenities you could offer, what are the most popular property types, etc. 
@@ -151,7 +141,7 @@
     <div id="section4" class="section">
         <div id="my_dataviz"></div>
         <div class="textbox" id="datan">
-            <p> Text </p>
+            <p> Therefore, to be a well-performing and competitive rental, you must not only consider location but also understand the way Airbnb booking patterns vary throughout the year. This heat map illustrates the monthly availability of Airbnbs in the top 10 neighborhoods, showing peak seasons and quieter periods. By understanding these trends, hosts can adjust their pricing strategies and optimize their listing times to maximize occupancy rates. </p>
         </div>
     </div>
 
@@ -257,8 +247,25 @@
                     .attr("x", (widthBar / 2))             
                     .attr("y", 0 - (marginBar.top / 2))
                     .attr("text-anchor", "middle")  
-                    .style("font-size", "24px")
+                    .style("font-size", "28px")
                     .text("Distribution of Airbnbs Across Neighborhoods in San Diego");
+
+
+                // Subtitle - breaking description into multiple lines
+                var subtitleText = [
+                    "This bar chart breaks down the number of Airbnbs in each neighborhood,",
+                    "revealing neighborhoods with high activity and high competition."
+                ];
+
+                subtitleText.forEach(function(line, i) {
+                    svgBar.append("text")
+                        .attr("x", (widthBar / 2))
+                        .attr("y", (30 + i * 20) - (marginBar.top / 2)) // Adjust the y value for line spacing
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "18px")
+                        .style("fill", "grey")
+                        .text(line);
+                });
 
                 // x-axis label
                 svgBar.append("text")
@@ -359,7 +366,7 @@
             };
             var mousemove = function(d) {
                 tooltip
-                    .html("There was " + d.value + " Airbnbs booked in this neighborhood for this month." )
+                    .html("There is an average of" + d.value + " Airbnbs booked in this neighborhood for this month." )
                     .style("left", (d3.event.pageX + 10) + "px")  // Position the tooltip to the right of the mouse pointer
                     .style("top", (d3.event.pageY - 10) + "px"); // Position the tooltip slightly above the mouse pointer
             };
@@ -392,23 +399,23 @@
                 .attr("x", 0)
                 .attr("y", -50)
                 .attr("text-anchor", "left")
-                .style("font-size", "22px")
+                .style("font-size", "28px")
                 .text("Availability of Airbnbs Over the Year");
 
 
     
         var subtitle = [
-            "This heatmap shows the number of booked Airbnbs over the months",
-            "in a year in the top 10 neighborhoods.",
+            "This heatmap shows the number of booked Airbnbs over ",
+            "the month in a year in the top 10 neighborhoods.",
         ];
 
         // Add subtitle to graph
         subtitle.forEach(function(line, i) {
             svgHeatmap.append("text")
                 .attr("x", 0)
-                .attr("y", -20 + i * 15)  // Adjust the y position for each line
+                .attr("y", -25 + i * 20)  // Adjust the y position for each line
                 .attr("text-anchor", "left")
-                .style("font-size", "14px")
+                .style("font-size", "18px")
                 .style("fill", "grey")
                 .style("max-width", 400)
                 .text(line);
