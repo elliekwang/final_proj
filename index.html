@@ -28,8 +28,8 @@
         }
 
         #map { 
-            width: 30%; /* Adjust this value to your preference */
-            height: 40%; /* Make sure the map takes up full height */
+            width: 50%; /* Adjust this value to your preference */
+            height: 60%; /* Make sure the map takes up full height */
             margin-left: 45%;
         }
 
@@ -47,9 +47,17 @@
         }
         #datan {
             width: 30%;
+            height: 50%;
+            margin-right: 50%;
+            margin-top: 4%;
+        }
+        #map_subtitle {
+            width: 40%;
             height: 30%;
             margin-right: 55%;
             margin-top: 13%;
+
+        
         }
     
 
@@ -92,13 +100,17 @@
             font-size: 28px;
             text-align: center;
             position: absolute;
-            padding-bottom: 500px;
+            padding-bottom: 700px;
             padding-left: 650px;
         }
-        #intro-subtitle {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
+        #intro_subtitle {
+            color: grey;
+            font-size: 16px;
+            text-align: center;
+            position: absolute;
+            padding-bottom: 600px;
+            padding-left: 400px;
+            margin-left: 15%        }
     </style>
     <!-- Load d3.js and Leaflet.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
@@ -123,17 +135,21 @@
     </div>
 
     <!-- Section 2 -->
-     <!-- Section 2 -->
     <div id="section2" class="section">
         <div id= "intro_title">
             <p> Mapping of San Diego's Airbnb Listings  </p>
         </div>
+        <div id= "intro_subtitle">
+            <p> This map provides an overview of the distribution of Airbnb listings, highlighting the most popular neighborhoods for short-term rentals. Understanding where listings are concentrated can help potential hosts identify areas with high demand.  </p>
+        </div>
         <div id="map"></div>
         <div class="textbox" id="mapn">
-            <p>San Diego's Airbnb market is thriving and diverse, with properties scattered across the city.</p>
-            <p>Using this map, we are able to recognize that the neighborhoods that are most populated with Airbnbs fall in close proximity to beaches as well as known tourist areas. Whether it's the beach vibes of Pacific Beach or the cultural charm of North Park, understanding which areas are popular and why can help you position your property to attract more bookings. 
+            <p> And San Diego's Airbnb market is thriving and diverse, with properties scattered across the city.
+
+                Using this map, we are able to recognize that the neighborhoods that are most populated with Airbnbs fall in close proximity to beaches as well as known tourist areas. This is crucial to an Airbnb planter since it is important to recognize where your competition is but also where there is an thriving enrivonment for guests to book your Airbnb.
+                
+                Whether it's the beach vibes of Pacific Beach or the cultural charm of North Park, understanding which areas are popular and why can help you position your property to attract more bookings. Tailor your offerings to the unique appeals of these hotspots, whether it's proximity to attractions, vibrant nightlife, or serene beach escapes.
             </p>
-            <p>Tailor your offerings to the unique appeals of these hotspots, whether it's proximity to attractions, vibrant nightlife, or serene beach escapes.</p>
         </div>
     </div>
   
@@ -151,21 +167,17 @@
         <svg id="barchart" width="1200" height="800"></svg>
     </div>
 
-    <!-- Section 4 -->
+        <!-- Section 4 -->
     <div id="section4" class="section">
         <div id="my_dataviz"></div>
         <div class="textbox" id="datan">
             <p> Picture the joy of fully booked months and the peace of knowing you’ve priced your listing perfectly. Use this data to experience the satisfaction of a well-planned hosting strategy.
             </p>
-            <p> To be a well-performing and competitive rental, you must not only consider location but also understand the way Airbnb booking patterns vary throughout the year. This heat map illustrates the monthly availability of Airbnbs in the top 10 neighborhoods, showing peak seasons, such as the summer months, and quieter periods, which constitute the earlier months of the year. By understanding these trends, hosts can adjust their pricing strategies and optimize their listing times to maximize occupancy rates. </p>
-
-            <p>
-
-            </p>
+            <p> To be a well-performing and competitive rental, you must not only consider location but also understand the way Airbnb booking patterns vary throughout the year. This heat map illustrates the monthly availability of Airbnbs in the top 10 neighborhoods, showing peak seasons and quieter periods. By understanding these trends, hosts can adjust their pricing strategies and optimize their listing times to maximize occupancy rates. </p>
+            <p>    An interesting take away from our visualization is the relationship between Airbnb listing density and what San Diego is known for by tourists. By seeing how densely populated Airbnbs are near popular beaches like Mission beach and famous tourist spots such as Balboa Park and the San Diego Zoo, everyone should learn that a strategic decision, such as listing location, requires researching and applying knowledge about the travel industry in order to optimize their listings.   </p>
         </div>
     </div>
 
-    </div>
 
     <script>
 
@@ -186,6 +198,8 @@
                 radius: 1
             }).addTo(map);
         });
+
+
 
         // Section #3 - Bar Chart
         var marginBar = {top: 50, right: 70, bottom: 200, left: 60},
@@ -281,7 +295,7 @@
                         .attr("x", (widthBar / 2))
                         .attr("y", (30 + i * 20) - (marginBar.top / 2)) // Adjust the y value for line spacing
                         .attr("text-anchor", "middle")
-                        .style("font-size", "18px")
+                        .style("font-size", "16px")
                         .style("fill", "grey")
                         .text(line);
                 });
@@ -433,7 +447,7 @@
                 .attr("x", 0)
                 .attr("y", -25 + i * 20)  // Adjust the y position for each line
                 .attr("text-anchor", "left")
-                .style("font-size", "18px")
+                .style("font-size", "16px")
                 .style("fill", "grey")
                 .style("max-width", 400)
                 .text(line);
