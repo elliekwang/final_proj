@@ -21,6 +21,11 @@
         #section1, #section2, #section3, #section4, #section5, #section6, #section7 {
             background-color: #d1c9cc;
         }
+
+        #section2{
+            
+        }
+
         svg {
             max-width: 100%;
             width: 100%;
@@ -34,11 +39,14 @@
         }
 
         #mapn {
-            width: 30%;
-            height: 40%;
-            margin-right: 55%;
-            margin-top: 16%;
-        }
+            width: 40%;  /* Make it wider */
+            height: auto;  /* Let content determine height */
+            max-height: 80vh;  /* Prevent it from getting too tall */
+            overflow-y: auto;  /* Add scrolling if needed */
+            margin-right: 50%;
+            margin-top: 10%;
+            padding: 20px;  /* Add padding for breathing room */
+}
 
         #my_dataviz{
             height: auto;
@@ -47,7 +55,7 @@
         }
         #datan {
             width: 30%;
-            height: 55%;
+            height: 65%;
             margin-right: 50%;
             margin-top: 4%;
         }
@@ -143,16 +151,17 @@
         <div id= "intro_subtitle">
             <p> This map provides an overview of the distribution of Airbnb listings, highlighting the most popular neighborhoods for short-term rentals. Understanding where listings are concentrated can help potential hosts identify areas with high demand.  </p>
         </div>
-        <div id="map"></div>
-        <div class="textbox" id="mapn">
-            <p> And San Diego's Airbnb market is thriving and diverse, with properties scattered across the city.
-            </p>
-            
-            <p>Using this map, we are able to recognize that the neighborhoods that are most populated with Airbnbs fall in close proximity to beaches as well as known tourist areas. This is crucial to an Airbnb planter since it is important to recognize where your competition is but also where there is an thriving enrivonment for guests to book your Airbnb.</p>
+        <div id= "map_text"></div>
+            <div id="map"></div>
+            <div class="textbox" id="mapn">
+                <p> And San Diego's Airbnb market is thriving and diverse, with properties scattered across the city.
+                </p>
                 
-            <p>Whether it's the beach vibes of Pacific Beach or the cultural charm of North Park, understanding which areas are popular and why can help you position your property to attract more bookings. Tailor your offerings to the unique appeals of these hotspots, whether it's proximity to attractions, vibrant nightlife, or serene beach escapes.</p>
-             
-        </div>
+                <p>Using this map, we are able to recognize that the neighborhoods that are most populated with Airbnbs fall in close proximity to beaches as well as known tourist areas. This is crucial to an Airbnb planter since it is important to recognize where your competition is but also where there is an thriving enrivonment for guests to book your Airbnb.</p>
+                    
+                <p>Whether it's the beach vibes of Pacific Beach or the cultural charm of North Park, understanding which areas are popular and why can help you position your property to attract more bookings. Tailor your offerings to the unique appeals of these hotspots, whether it's proximity to attractions, vibrant nightlife, or serene beach escapes.</p>
+                
+            </div>
     </div>
   
 

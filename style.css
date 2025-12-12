@@ -1,19 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
 .scrollytelling {
   display: flex;
 }
 
+.step {
+  padding: 80px 50px;
+  font-size: 20px;
+  line-height: 1.6;
+  border-bottom: 1px solid #ccc;
+  min-height: 100vh; /* Ensures each section gets full screen */
+}
+
 .scrolly-container {
   width: 50%;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100vh;
 }
 
-.step {
-  padding: 50px;
-  font-size: 20px;
-  border-bottom: 1px solid #ccc;
-}
-
+/* RIGHT: fixed graphic column */
 .graphic-container {
   position: fixed;
   width: 50%;
@@ -21,7 +28,54 @@
   right: 0;
 }
 
+/* SVG graphic fills container */
 svg {
   width: 100%;
   height: 100%;
+}
+
+/* Fix overflow - add at the end */
+#datan {
+    height: auto !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    padding-bottom: 20px !important;
+}
+
+.textbox {
+    overflow-y: auto !important;
+    max-height: 85vh !important;
+}
+
+#datan {
+    width: 30%;
+    max-height: 75vh; /* CHANGE height to max-height */
+    overflow-y: auto; /* ADD THIS */
+    margin-right: 50%;
+    margin-top: 4%;
+}
+
+#intro_title {
+    color: black;
+    font-size: 28px;
+    text-align: center;
+    position: absolute;
+    top: 40%;  /* Middle of screen */
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Center both horizontally and vertically */
+    width: 80%;
+    max-width: 800px;
+}
+
+#intro_subtitle {
+    color: grey;
+    font-size: 16px;
+    text-align: center;
+    position: absolute;
+    top: 55%;  /* Slightly below title */
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Center both horizontally and vertically */
+    width: 70%;
+    max-width: 700px;
+    line-height: 1.6;
 }
