@@ -55,27 +55,3 @@ svg {
     margin-top: 4%;
 }
 
-#intro_title {
-    color: black;
-    font-size: 28px;
-    text-align: center;
-    position: absolute;
-    top: 40%;  /* Middle of screen */
-    left: 50%;
-    transform: translate(-50%, -50%);  /* Center both horizontally and vertically */
-    width: 80%;
-    max-width: 800px;
-}
-
-#intro_subtitle {
-    color: grey;
-    font-size: 16px;
-    text-align: center;
-    position: absolute;
-    top: 55%;  /* Slightly below title */
-    left: 50%;
-    transform: translate(-50%, -50%);  /* Center both horizontally and vertically */
-    width: 70%;
-    max-width: 700px;
-    line-height: 1.6;
-}
